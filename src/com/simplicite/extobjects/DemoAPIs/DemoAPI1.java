@@ -4,7 +4,7 @@ import com.simplicite.util.tools.JSONTool;
 import com.simplicite.util.tools.Parameters;
 
 /**
- * Custom REST web services (suppliers and products only)
+ * Custom mapped REST web services
  */
 public class DemoAPI1 extends com.simplicite.webapp.services.RESTMappedObjectsExternalObject {
 	private static final long serialVersionUID = 1L;
@@ -54,7 +54,7 @@ public class DemoAPI1 extends com.simplicite.webapp.services.RESTMappedObjectsEx
 		addOperationDesc("products", OPERATION_CREATE, "This is the **create** operation for the _product_ business object");
 		addOperationDesc("products", OPERATION_UPDATE, "This is the **update** operation for the _product_ business object");
 		addOperationDesc("products", OPERATION_DELETE, "This is the **delete** operation for the _product_ business object");*/
-		
+
 		addObject(STATS, "DemoStats", DESC_HIDDEN_FROM_SCHEMA);
 		addField(STATS, "status", "demoOrdStatus");
 		addField(STATS, "count", "demoStsCount");
