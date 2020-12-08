@@ -16,7 +16,7 @@ import com.simplicite.util.tools.Parameters;
 public class DemoAPI2 extends com.simplicite.webapp.services.RESTServiceExternalObject {
 	private static final long serialVersionUID = 1L;
 
-	private JSONObject config = null;
+	private transient JSONObject config = null;
 
 	/**
 	 * Externa object initialization: load the JSON configuration stored in the dedicated system parameter
