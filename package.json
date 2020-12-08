@@ -1,0 +1,9 @@
+{
+    "name": "DemoAPIs",
+    "format": "json",
+    "description": "",
+    "files": ["DemoAPIs.json"],
+    "repository": {},
+    "version": "5",
+    "dependencies": {"Simplicite": "5"}
+}

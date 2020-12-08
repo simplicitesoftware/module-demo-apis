@@ -1,0 +1,9 @@
+{
+  "name":"ModuleLink",
+  "action":"upsert",
+  "data":[{
+    "mdk_parent_id.mdl_name":"Demo",
+    "row_module_id.mdl_name":"DemoAPIs",
+    "mdk_cascad":"R"
+    }]
+}

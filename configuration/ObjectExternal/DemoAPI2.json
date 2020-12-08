@@ -1,0 +1,15 @@
+{
+  "name":"ObjectExternal",
+  "action":"upsert",
+  "data":[{
+    "obe_name":"DemoAPI2",
+    "obe_type":"E",
+    "obe_url":"",
+    "obe_comment":"Custom REST web services",
+    "obe_help":"",
+    "obe_class":"",
+    "obe_script_id":"src/com/simplicite/extobjects/DemoAPIs/DemoAPI2.java",
+    "obe_icon":"",
+    "row_module_id.mdl_name":"DemoAPIs"
+    }]
+}

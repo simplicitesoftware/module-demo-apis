@@ -1,0 +1,13 @@
+{
+  "name":"Function",
+  "action":"upsert",
+  "data":[{
+    "fct_name":"DemoAPI2-E",
+    "fct_object_id.obj_type":"E",
+    "fct_object_id.obj_name":"DemoAPI2",
+    "fct_function":"L",
+    "fct_action_id.act_name":"",
+    "fct_view_id.viw_name":"",
+    "row_module_id.mdl_name":"DemoAPIs"
+    }]
+}
