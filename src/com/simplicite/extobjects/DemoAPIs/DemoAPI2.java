@@ -16,7 +16,7 @@ import com.simplicite.util.tools.Parameters;
 public class DemoAPI2 extends com.simplicite.webapp.services.RESTServiceExternalObject {
 	private static final long serialVersionUID = 1L;
 
-	private static JSONObject config = null;
+	private JSONObject config = null;
 
 	/**
 	 * Externa object initialization: load the JSON configuration stored in the dedicated system parameter
@@ -36,7 +36,7 @@ public class DemoAPI2 extends com.simplicite.webapp.services.RESTServiceExternal
 		try {
 			List<String> parts = params.getURIParts(getName());
 
-			if (parts.size() == 0)
+			if (parts.isEmpty())
 				return notFound("No object");
 
 			String objName = parts.get(0);
