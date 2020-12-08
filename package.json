@@ -1,8 +1,8 @@
 {
     "name": "DemoAPIs",
-    "format": "json",
+    "format": "xml",
     "description": "",
-    "files": ["DemoAPIs.json"],
+    "files": ["DemoAPIs.xml"],
     "repository": {},
     "version": "5",
     "dependencies": {"Simplicite": "5"}
