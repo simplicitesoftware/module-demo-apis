@@ -13,14 +13,30 @@ import com.simplicite.util.tools.Parameters;
 public class DemoAPI2 extends com.simplicite.webapp.services.RESTServiceExternalObject {
 	private static final long serialVersionUID = 1L;
 
+	private static JSONObject config = null;
+	
+	@Override
+	public void init(Parameters params) {
+		config = getGrant().getJSONObjectParameter("DEMO_API2_CONFIG");
+	}
+
 	@Override
 	public Object get(Parameters params) throws HTTPException
 	{
-		ObjectDB obj = borrowAPIObject("DemoProduct"); // borrow an API object instance from the pool
+		ObjectDB obj = null;
 		try {
 			List<String> parts = params.getURIParts(getName());
+			
+			if (parts.size() == 0)
+				return notFound("No object");
 
-			if (parts.size() == 0) { // Search
+			String objName = parts.get(0);
+			if (!config.has(objName))
+				return notFound("Unknown object: " + objName);
+
+			obj = borrowAPIObject(objName); // borrow an API object instance from the pool
+
+			if (parts.size() == 1) { // Search
 				List<String[]> rows = obj.getTool().search(params.getParameters()); // filtered search
 
 				// Remove row IDs
@@ -29,13 +45,14 @@ public class DemoAPI2 extends com.simplicite.webapp.services.RESTServiceExternal
 					list.getJSONObject(i).remove("row_id");
 
 				return list;
-			} else { // Select from reference
-				String reference = parts.get(0);
-				List<String[]> rows = obj.getTool().search(new JSONObject().put("demoPrdReference", reference)); // filtered search using reference only
+			} else { // Select from the custom field
+				String value = parts.get(1);
+				String field = config.getString(objName);
+				List<String[]> rows = obj.getTool().search(new JSONObject().put(field, value)); // filtered search using reference only
 
-				// No unique record matching reference => not found
+				// No unique record matching the field value => not found
 				if (rows.size() != 1)
-					return notFound("No prodduct for reference " + reference);
+					return notFound("No " + objName + " for " + field + " = " + value);
 
 				// Remove row ID
 				JSONObject item = new JSONObject(obj.toJSON(rows.get(0), null, false, true));
@@ -46,7 +63,8 @@ public class DemoAPI2 extends com.simplicite.webapp.services.RESTServiceExternal
 		} catch (SearchException e) {
 			return error(e);
 		} finally {
-			returnAPIObject(obj); // return the API object intance to the pool
+			if (obj != null)
+				returnAPIObject(obj); // return the API object intance to the pool
 		}
 	}
 }

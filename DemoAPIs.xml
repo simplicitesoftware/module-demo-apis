@@ -56,6 +56,21 @@ To import this module:
 	</data>
 </object>
 <object>
+	<name>SystemParam</name>
+	<action>upsert</action>
+	<data>
+		<sys_code>DEMO_API2_CONFIG</sys_code>
+		<sys_value><![CDATA[{
+	"DemoProduct": "demoPrdReference",
+	"DemoSupplier": "demoSupCode"
+}]]></sys_value>
+		<sys_value2/>
+		<sys_type>PRV</sys_type>
+		<sys_desc><![CDATA[Custom demo API example 2 configuration]]></sys_desc>
+		<row_module_id.mdl_name>DemoAPIs</row_module_id.mdl_name>
+	</data>
+</object>
+<object>
 	<name>ObjectExternal</name>
 	<action>upsert</action>
 	<data>
