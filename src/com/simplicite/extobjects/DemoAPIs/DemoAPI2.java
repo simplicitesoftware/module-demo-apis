@@ -20,16 +20,16 @@ public class DemoAPI2 extends com.simplicite.webapp.services.RESTServiceExternal
 		try {
 			List<String> parts = params.getURIParts(getName());
 
-			if (parts.size() == 0) { // search
+			if (parts.size() == 0) { // Search
 				List<String[]> rows = obj.getTool().search(params.getParameters()); // filtered search
 
 				// Remove row IDs
-				JSONArray list = new JSONArray(obj.toJSON(rows, null, false, true, true));
+				JSONArray list = new JSONArray(obj.toJSON(rows, null, false, true, false));
 				for (int i = 0; i < list.length(); i++)
 					list.getJSONObject(i).remove("row_id");
 
 				return list;
-			} else { // get (/<reference>)
+			} else { // Select from reference
 				String reference = parts.get(0);
 				List<String[]> rows = obj.getTool().search(new JSONObject().put("demoPrdReference", reference)); // filtered search using reference only
 
@@ -37,7 +37,11 @@ public class DemoAPI2 extends com.simplicite.webapp.services.RESTServiceExternal
 				if (rows.size() != 1)
 					return notFound("No prodduct for reference " + reference);
 
-				return new JSONObject(obj.toJSON(rows.get(0), null, false, true)).remove("row_id");
+				// Remove row ID
+				JSONObject item = new JSONObject(obj.toJSON(rows.get(0), null, false, true));
+				item.remove("row_id");
+
+				return item;
 			}
 		} catch (SearchException e) {
 			return error(e);
