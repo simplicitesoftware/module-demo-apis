@@ -42,6 +42,19 @@ To import this module:
 
 - Click on the _Import module_ button
 
+### Configure
+
+Custom URIs can be configured in the `URI_MAPPINGS` system parameter:
+
+```json
+[
+	(...)
+	{ "source": "^/demo/api/v1(.+)$", "destination": "/api/ext/DemoAPI1$1" },
+	{ "source": "^/demo/api/v2(.+)$", "destination": "/api/ext/DemoAPI2$1" },
+	(...)
+]
+```
+
 `DemoAPI1` external object definition
 -------------------------------------
 
