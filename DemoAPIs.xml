@@ -13,7 +13,7 @@
 		"uri": "https://github.com/simplicitesoftware/module-demo-apis.git"
 	}
 }]]></mdl_url>
-		<mdl_lastupd/>
+		<mdl_type>C</mdl_type>
 		<mdl_comment><![CDATA[[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=simplicite-modules-DemoProject&metric=alert_status)](https://sonarcloud.io/dashboard?id=simplicite-modules-DemoProject)
 
 ### Introduction
@@ -65,7 +65,7 @@ Custom URIs can be configured in the `URI_MAPPINGS` system parameter:
 	<data>
 		<mdk_parent_id.mdl_name>Demo</mdk_parent_id.mdl_name>
 		<row_module_id.mdl_name>DemoAPIs</row_module_id.mdl_name>
-		<mdk_cascad>R</mdk_cascad>
+		<mdk_cascad>C</mdk_cascad>
 	</data>
 </object>
 <object>
