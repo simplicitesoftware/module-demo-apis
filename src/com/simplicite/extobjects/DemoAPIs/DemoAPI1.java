@@ -27,7 +27,7 @@ public class DemoAPI1 extends com.simplicite.webapp.services.RESTMappedObjectsEx
 
 		addObject(PRODUCTS, "DemoProduct");
 		// **Without** embedded list
-		//addRefField(prd, sup, "supplierId", "demoPrdSupId", "Reference to supplier's row ID");
+		//addRefField(PRODUCTS, SUPPLIERS, "supplierId", "demoPrdSupId", "Reference to supplier's row ID");
 		// **With** embedded list
 		addRefField(PRODUCTS, SUPPLIERS, "supplierId", "demoPrdSupId", "supplierProducts", true, "Reference to supplier's row ID");
 		addField(PRODUCTS, "supplierCode", "demoPrdSupId.demoSupCode");
@@ -38,7 +38,7 @@ public class DemoAPI1 extends com.simplicite.webapp.services.RESTMappedObjectsEx
 
 		addObject(ORDERS, "DemoOrder");
 		// **Without** embedded list
-		//addRefField(ord, prd, "productId", "demoOrdPrdId", "Reference to product's row ID");
+		//addRefField(ORDERS, PRODUCTS, "productId", "demoOrdPrdId", "Reference to product's row ID");
 		// **With** embedded list
 		addRefField(ORDERS, PRODUCTS, "productId", "demoOrdPrdId", "productOrders", true, "Reference to product's row ID");
 		addField(ORDERS, "number", "demoOrdNumber");
