@@ -9,16 +9,19 @@ import com.simplicite.util.tools.Parameters;
 public class DemoAPI1 extends com.simplicite.webapp.services.RESTMappedObjectsExternalObject {
 	private static final long serialVersionUID = 1L;
 
-	public static final String SUPPLIERS = "suppliers";
-	public static final String PRODUCTS = "products";
-	public static final String ORDERS = "orders";
-	public static final String STATS = "stats";
+	// Embbed linked lists?
+	private static final boolean EMBED_LINKS = true;
+
+	private static final String SUPPLIERS = "suppliers";
+	private static final String PRODUCTS = "products";
+	private static final String ORDERS = "orders";
+	private static final String STATS = "stats";
 
 	@Override
 	public void init(Parameters params) {
 		setOpenAPISpec(JSONTool.OPENAPI_OAS2);
 		setOpenAPIDesc("This is a **simplified** variant of the demo API for the following business objects:\n\n- Suppliers\n- Products\n- Orders");
-		setOpenAPIVers("v4.0");
+		setOpenAPIVers("v5");
 		/*addOperationDesc(null, OPERATION_PING, "This is the **ping** operation");*/
 
 		addObject(SUPPLIERS, "DemoSupplier");
@@ -26,10 +29,7 @@ public class DemoAPI1 extends com.simplicite.webapp.services.RESTMappedObjectsEx
 		addField(SUPPLIERS, "name", "demoSupName");
 
 		addObject(PRODUCTS, "DemoProduct");
-		// **Without** embedded list
-		//addRefField(PRODUCTS, SUPPLIERS, "supplierId", "demoPrdSupId", "Reference to supplier's row ID");
-		// **With** embedded list
-		addRefField(PRODUCTS, SUPPLIERS, "supplierId", "demoPrdSupId", "supplierProducts", true, "Reference to supplier's row ID");
+		addRefField(PRODUCTS, SUPPLIERS, "supplierId", "demoPrdSupId", "supplierProducts", EMBED_LINKS, "Reference to supplier's row ID");
 		addField(PRODUCTS, "supplierCode", "demoPrdSupId.demoSupCode");
 		addField(PRODUCTS, "supplierName", "demoPrdSupId.demoSupName");
 		addField(PRODUCTS, "reference", "demoPrdReference");
@@ -37,10 +37,7 @@ public class DemoAPI1 extends com.simplicite.webapp.services.RESTMappedObjectsEx
 		addField(PRODUCTS, "name", "demoPrdName");
 
 		addObject(ORDERS, "DemoOrder");
-		// **Without** embedded list
-		//addRefField(ORDERS, PRODUCTS, "productId", "demoOrdPrdId", "Reference to product's row ID");
-		// **With** embedded list
-		addRefField(ORDERS, PRODUCTS, "productId", "demoOrdPrdId", "productOrders", true, "Reference to product's row ID");
+		addRefField(ORDERS, PRODUCTS, "productId", "demoOrdPrdId", "productOrders", EMBED_LINKS, "Reference to product's row ID");
 		addField(ORDERS, "number", "demoOrdNumber");
 		addField(ORDERS, "date", "demoOrdDate");
 		addField(ORDERS, "status", "demoOrdStatus");
