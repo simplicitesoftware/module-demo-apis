@@ -21,8 +21,8 @@ public class DemoAPI1 extends com.simplicite.webapp.services.RESTMappedObjectsEx
 	public void init(Parameters params) {
 		setOpenAPISpec(JSONTool.OPENAPI_OAS2);
 		setOpenAPIDesc("This is a **simplified** variant of the demo API for the following business objects:\n\n- Suppliers\n- Products\n- Orders");
-		setOpenAPIVers("v5");
-		/*addOperationDesc(null, OPERATION_PING, "This is the **ping** operation");*/
+		setOpenAPIVers("v1");
+		//addOperationDesc(null, OPERATION_PING, "This is the **ping** operation");
 
 		addObject(SUPPLIERS, "DemoSupplier");
 		addField(SUPPLIERS, "code", "demoSupCode");
@@ -46,11 +46,11 @@ public class DemoAPI1 extends com.simplicite.webapp.services.RESTMappedObjectsEx
 		addField(ORDERS, "productType", "demoOrdPrdId.demoPrdType");
 		addField(ORDERS, "productSupplierCode", "demoOrdPrdId.demoPrdSupId.demoSupCode");
 		addField(ORDERS, "productSupplierName", "demoOrdPrdId.demoPrdSupId.demoSupName");
-		/*addOperationDesc("products", OPERATION_SEARCH, "This is the **search** operation for the _product_ business object");
-		addOperationDesc("products", OPERATION_GET, "This is the **get** operation for the _product_ business object");
-		addOperationDesc("products", OPERATION_CREATE, "This is the **create** operation for the _product_ business object");
-		addOperationDesc("products", OPERATION_UPDATE, "This is the **update** operation for the _product_ business object");
-		addOperationDesc("products", OPERATION_DELETE, "This is the **delete** operation for the _product_ business object");*/
+		//addOperationDesc("products", OPERATION_SEARCH, "This is the **search** operation for the _product_ business object");
+		//addOperationDesc("products", OPERATION_GET, "This is the **get** operation for the _product_ business object");
+		//addOperationDesc("products", OPERATION_CREATE, "This is the **create** operation for the _product_ business object");
+		//addOperationDesc("products", OPERATION_UPDATE, "This is the **update** operation for the _product_ business object");
+		//addOperationDesc("products", OPERATION_DELETE, "This is the **delete** operation for the _product_ business object");
 
 		addObject(STATS, "DemoStats", DESC_HIDDEN_FROM_SCHEMA);
 		addField(STATS, "status", "demoOrdStatus");
