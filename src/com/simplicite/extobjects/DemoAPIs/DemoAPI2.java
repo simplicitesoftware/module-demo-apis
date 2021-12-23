@@ -30,8 +30,7 @@ public class DemoAPI2 extends com.simplicite.webapp.services.RESTServiceExternal
 	 * Search/select using URI <code>/api/ext/DemoAPI2/&lt;object name&gt;[?&lt;field name 1&bt;=&lt;filter 1&bt;&amp;&lt;field name 2&gt;=&lt;filter 2&gt;&amp;...|/&lt;unique ID field name&gt;]</code>
 	 */
 	@Override
-	public Object get(Parameters params) throws HTTPException
-	{
+	public Object get(Parameters params) throws HTTPException {
 		ObjectDB obj = null;
 		try {
 			List<String> parts = params.getURIParts(getName());
