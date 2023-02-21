@@ -24,19 +24,20 @@ public class DemoAPI1 extends com.simplicite.webapp.services.RESTMappedObjectsEx
 		setOpenAPIVers("v1");
 		//addOperationDesc(null, OPERATION_PING, "This is the **ping** operation");
 
-		addObject(SUPPLIERS, "DemoSupplier");
+		addObject(SUPPLIERS, "DemoSupplier", "Supplier");
 		addField(SUPPLIERS, "code", "demoSupCode");
 		addField(SUPPLIERS, "name", "demoSupName");
 
-		addObject(PRODUCTS, "DemoProduct");
+		addObject(PRODUCTS, "DemoProduct", "Product");
 		addRefField(PRODUCTS, SUPPLIERS, "supplierId", "demoPrdSupId", "supplierProducts", EMBED_LINKS, "Reference to supplier's row ID");
-		addField(PRODUCTS, "supplierCode", "demoPrdSupId.demoSupCode");
-		addField(PRODUCTS, "supplierName", "demoPrdSupId.demoSupName");
-		addField(PRODUCTS, "reference", "demoPrdReference");
-		addField(PRODUCTS, "type", "demoPrdType");
-		addField(PRODUCTS, "name", "demoPrdName");
+		addField(PRODUCTS, "supplierCode", "demoPrdSupId.demoSupCode", "Supplier code", null);
+		addField(PRODUCTS, "supplierName", "demoPrdSupId.demoSupName", "Supplier name", null);
+		addField(PRODUCTS, "reference", "demoPrdReference", "Product reference", "REFxxx");
+		addField(PRODUCTS, "type", "demoPrdType", "Product type", null);
+		addField(PRODUCTS, "name", "demoPrdName", "Product name", null);
 
-		addObject(ORDERS, "DemoOrder");
+		addObject(ORDERS, "DemoOrder", "Order");
+		// or to force pagination (10 by 10): addObject(ORDERS, "DemoOrder", "Order", true, 10);
 		addRefField(ORDERS, PRODUCTS, "productId", "demoOrdPrdId", "productOrders", EMBED_LINKS, "Reference to product's row ID");
 		addField(ORDERS, "number", "demoOrdNumber");
 		addField(ORDERS, "date", "demoOrdDate");
