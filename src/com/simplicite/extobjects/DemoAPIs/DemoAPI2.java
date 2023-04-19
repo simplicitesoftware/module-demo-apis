@@ -43,7 +43,7 @@ public class DemoAPI2 extends com.simplicite.webapp.services.RESTServiceExternal
 			if (parts.isEmpty())
 				return notFound("No object");
 
-			if ("schema".equals(parts.get(0))) {
+			if ("openapi.yml".equals(parts.get(0))) {
 				setYAMLMIMEType();
 				return JSONTool.getYAMLASCIILogo(null) + JSONTool.toYAML(openapi());
 			}
