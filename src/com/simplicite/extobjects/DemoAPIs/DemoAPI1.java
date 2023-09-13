@@ -35,6 +35,7 @@ public class DemoAPI1 extends com.simplicite.webapp.services.RESTMappedObjectsEx
 		addField(PRODUCTS, "reference", "demoPrdReference", "Product reference", "REFxxx");
 		addField(PRODUCTS, "type", "demoPrdType", "Product type", null);
 		addField(PRODUCTS, "name", "demoPrdName", "Product name", null);
+		addField(PRODUCTS, "available", "demoPrdAvailable", "Available product?", null);
 
 		addObject(ORDERS, "DemoOrder", "Order");
 		// or to force pagination (10 by 10): addObject(ORDERS, "DemoOrder", "Order", true, 10);
