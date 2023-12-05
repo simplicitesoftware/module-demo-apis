@@ -77,7 +77,6 @@ Custom URIs can be configured in the `URI_MAPPINGS` system parameter:
 	"DemoProduct": "demoPrdReference",
 	"DemoSupplier": "demoSupCode"
 }]]></sys_value>
-		<sys_value2/>
 		<sys_type>PRV</sys_type>
 		<sys_desc><![CDATA[Custom demo API example 2 configuration]]></sys_desc>
 		<row_module_id.mdl_name>DemoAPIs</row_module_id.mdl_name>
