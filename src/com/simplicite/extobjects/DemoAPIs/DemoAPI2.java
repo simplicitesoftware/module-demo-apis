@@ -5,8 +5,6 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.simplicite.util.Globals;
-import com.simplicite.util.ModuleDB;
 import com.simplicite.util.ObjectDB;
 import com.simplicite.util.annotations.RESTService;
 import com.simplicite.util.annotations.RESTServiceParam;
@@ -14,8 +12,6 @@ import com.simplicite.util.annotations.RESTServiceOperation;
 import com.simplicite.util.exceptions.HTTPException;
 import com.simplicite.util.exceptions.SearchException;
 import com.simplicite.util.tools.Parameters;
-import com.simplicite.util.tools.HTTPTool;
-import com.simplicite.util.tools.HTMLTool;
 import com.simplicite.util.tools.JSONTool;
 
 /**
@@ -28,15 +24,23 @@ public class DemoAPI2 extends com.simplicite.webapp.services.RESTServiceExternal
 	@RESTServiceOperation(method = "get", path = "/{object}", desc = "Search for specified object")
 	public JSONArray searchObjectRecords(
 			@RESTServiceParam(name = "object", in = "path", desc = "Object name")
+			String object
+		) throws SearchException {
+		return searchObjectRecords(object, null);
+	}
+
+	@RESTServiceOperation(method = "post", path = "/{object}", desc = "Search for specified object with filters")
+	public JSONArray searchObjectRecords(
+			@RESTServiceParam(name = "object", in = "path", desc = "Object name")
 			String object,
-			@RESTServiceParam(name = "params", in = "query", type="object", desc = "Search parameters, e.g. filters")
-			Parameters params
+			@RESTServiceParam(name = "filters", in = "body", type="object", desc = "Search filters")
+			JSONObject filters
 		) throws SearchException {
 		ObjectDB obj = null;
 		try {
 			obj = borrowAPIObject(object); // Borrow an API object instance from the pool (ZZZ must be returned, see below)
 
-			List<String[]> rows = obj.getTool().search(params.getParameters()); // filtered search
+			List<String[]> rows = obj.getTool().search(filters); // filtered search
 
 			// Remove standard row IDs
 			JSONArray list = new JSONArray(obj.toJSON(rows, null, false, true, false));
@@ -77,6 +81,14 @@ public class DemoAPI2 extends com.simplicite.webapp.services.RESTServiceExternal
 		}
 	}
 
+	private Object getOpenAPISchema(String name) {
+		if (name.endsWith(".yml") || name.endsWith(".yaml")) {
+			setYAMLMIMEType();
+			return JSONTool.getYAMLASCIILogo(null) + JSONTool.toYAML(openapi());
+		}
+		return openapi();
+	}
+
 	@Override
 	public Object get(Parameters params) throws HTTPException {
 		List<String> parts = params.getURIParts(getName());
@@ -84,10 +96,8 @@ public class DemoAPI2 extends com.simplicite.webapp.services.RESTServiceExternal
 		if (parts.isEmpty())
 			return notFound("No object");
 
-		if ("openapi.yml".equals(parts.get(0))) {
-			setYAMLMIMEType();
-			return JSONTool.getYAMLASCIILogo(null) + JSONTool.toYAML(openapi());
-		}
+		if (parts.get(0).startsWith("openapi"))
+			return getOpenAPISchema(parts.get(0));
 
 		String object = parts.get(0);
 		if (!getSettings().has(object))
@@ -95,9 +105,27 @@ public class DemoAPI2 extends com.simplicite.webapp.services.RESTServiceExternal
 
 		try {
 			if (parts.size() == 1)
-				return success(searchObjectRecords(object, params));
+				return success(searchObjectRecords(object));
 			else
 				return success(getObjectRecord(object, parts.get(1)));
+		} catch (SearchException e) {
+			return error(e);
+		}
+	}
+
+	@Override
+	public Object post(Parameters params) throws HTTPException {
+		List<String> parts = params.getURIParts(getName());
+
+		if (parts.isEmpty())
+			return notFound("No object");
+
+		String object = parts.get(0);
+		if (!getSettings().has(object))
+			return notFound("Unknown object: " + object);
+
+		try {
+			return success(searchObjectRecords(object, params.getJSONObject()));
 		} catch (SearchException e) {
 			return error(e);
 		}

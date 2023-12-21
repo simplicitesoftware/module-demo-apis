@@ -57,7 +57,48 @@ Custom URIs can be configured in the `URI_MAPPINGS` system parameter:
 	{ "source": "^/demo/api/v2(.+)$", "destination": "/api/ext/DemoAPI2$1" },
 	(...)
 ]
-```]]></mdl_comment>
+```
+
+### Usage
+
+In both cases you need to obtain an authentication token:
+
+```text
+TOKEN=$(curl -s -u <username>:<password> "<base URL>/api/login")
+```
+
+#### Custom API usage
+
+Get the OpenAPI schema:
+
+```text
+curl -s -H "Authorization: Bearer $TOKEN" "<base URL>/api/ext/DemoAPI2/openapi.<json|yaml>"
+```
+
+Get a list of all products:
+
+```text
+curl -s -H "Authorization: Bearer $TOKEN" "<base URL>/api/ext/DemoAPI2/DemoProduct"
+```
+
+Get a single product with its reference (e.g. `REF002`):
+
+```text
+curl -s -H "Authorization: Bearer $TOKEN" "<base URL>/api/ext/DemoAPI2/DemoProduct/REF002"
+```
+
+Search for products passing filters as JSON body
+(e.g. search for the available products supplied by the `BIM` supplier):
+
+```text
+curl -s -H "Authorization: Bearer $TOKEN" \
+    -H 'Content-Type: application/json' \
+    -d '{ "demoPrdSupId__demoSupCode": "BIM", "demoPrdAvailable": true }' \
+    "<base URL>/api/ext/DemoAPI2/DemoProduct"
+```
+
+> **Note** the `Content-Type: application/json` header is **mandatory** for the 
+> body to be parsed as JSON.]]></mdl_comment>
 	</data>
 </object>
 <object>
