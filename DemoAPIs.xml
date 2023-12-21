@@ -120,29 +120,101 @@ curl -s -H "Authorization: Bearer $TOKEN" \
 		<obe_nature>com_simplicite_webapp_services_RESTMappedObjectsExternalObject</obe_nature>
 		<obe_url/>
 		<obe_settings><![CDATA[{
-  "objects": [{
-    "name": "supplier",
-    "fields": [
-      {
-        "field": "demoSupCode",
-        "name": "code",
-        "desc": "Supplier code"
-      },
-      {
-        "field": "demoSupName",
-        "name": "name",
-        "desc": "Supplier name"
-      }
-    ],
-    "object": "DemoSupplier",
-    "desc": "Supplier"
-  }],
+  "objects": [
+    {
+      "name": "suppliers",
+      "fields": [
+        {
+          "field": "demoSupCode",
+          "name": "code",
+          "desc": "Supplier code"
+        },
+        {
+          "field": "demoSupName",
+          "name": "name",
+          "desc": "Supplier name"
+        }
+      ],
+      "object": "DemoSupplier",
+      "desc": "Suppliers"
+    },
+    {
+      "name": "products",
+      "refFields": [{
+        "refField": "demoPrdSupId",
+        "refFieldName": "supplierId",
+        "depth": 10,
+        "name": "supplierProducts",
+        "refObjectName": "suppliers",
+        "desc": "Reference to supplier's row ID"
+      }],
+      "fields": [
+        {
+          "field": "demoPrdSupId.demoSupCode",
+          "name": "supplierCode",
+          "desc": "Supplier code"
+        },
+        {
+          "field": "demoPrdSupId.demoSupName",
+          "name": "supplierName",
+          "desc": "Supplier name"
+        },
+        {
+          "field": "demoPrdReference",
+          "name": "reference",
+          "desc": "Product reference",
+          "example": "REF001"
+        },
+        {
+          "field": "demoPrdName",
+          "name": "name",
+          "desc": "Product name"
+        },
+        {
+          "field": "demoPrdType",
+          "name": "type",
+          "desc": "Product type"
+        },
+        {
+          "field": "demoPrdAvailable",
+          "name": "available",
+          "desc": "Product available?"
+        }
+      ],
+      "object": "DemoProduct",
+      "desc": "Products"
+    },
+    {
+      "hidden": true,
+      "name": "stats",
+      "fields": [
+        {
+          "field": "demoOrdStatus",
+          "name": "status"
+        },
+        {
+          "field": "demoStsCount",
+          "name": "count"
+        },
+        {
+          "field": "demoStsQuantity",
+          "name": "quantity"
+        },
+        {
+          "field": "demoStsTotal",
+          "name": "total"
+        }
+      ],
+      "object": "DemoStats"
+    }
+  ],
+  "name": "Custom mapped API",
   "embedLinks": true,
   "version": "v1",
   "spec": 3,
-  "desc": "This is a **simplified** variant of the demo API for the following business objects:\n\n- Suppliers\n- Products\n- Orders"
+  "desc": "This is a custom **mapped** API of the demo application for the following business objects:\n\n- Suppliers\n- Products\n- Orders"
 }]]></obe_settings>
-		<obe_comment><![CDATA[Custom REST web services]]></obe_comment>
+		<obe_comment><![CDATA[Custom **mapped** REST web services]]></obe_comment>
 		<obe_help/>
 		<obe_class/>
 		<obe_script_id>src/com/simplicite/extobjects/DemoAPIs/DemoAPI1.java</obe_script_id>

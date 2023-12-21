@@ -99,7 +99,7 @@ curl -s -H "Authorization: Bearer $TOKEN" \
 `DemoAPI1` external object definition
 -------------------------------------
 
-Custom REST web services
+Custom **mapped** REST web services
 
 
 `DemoAPI2` external object definition
