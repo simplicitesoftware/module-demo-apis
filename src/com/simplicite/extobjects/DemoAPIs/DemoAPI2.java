@@ -85,7 +85,7 @@ public class DemoAPI2 extends com.simplicite.webapp.services.RESTServiceExternal
 				returnAPIObject(obj); // Return the API object intance to the pool
 		}
 	}
-	
+
 	@Override
 	public JSONObject openapi() {
 		int[] errs = new int[] { 400, 401, 500 };
@@ -128,6 +128,6 @@ public class DemoAPI2 extends com.simplicite.webapp.services.RESTServiceExternal
 			.put("description", HTMLTool.toPlainMarkdownText(getDesc()))
 			.put("version", HTMLTool.toPlainText(ModuleDB.getModuleVersionFromId(getModuleId())));
 
-		return JSONTool.getOpenAPISchema(getGrant(), JSONTool.OPENAPI_OAS3, info, null, Globals.WEB_API_PATH + "/" + getName(), paths, schemas);
+		return JSONTool.getOpenAPISchema(getGrant(), JSONTool.OPENAPI_OAS3, info, null, Globals.WEB_API_PATH + "/" + getName(), paths, schemas, true);
 	}
 }
