@@ -1,11 +1,5 @@
 package com.simplicite.extobjects.DemoAPIs;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import com.simplicite.util.tools.JSONTool;
-import com.simplicite.util.tools.Parameters;
-
 /**
  * Custom mapped REST web services
  */
@@ -16,7 +10,7 @@ public class DemoAPI1 extends com.simplicite.webapp.services.RESTMappedObjectsEx
 	private static final String ORDERS = "orders";
 
 	@Override
-	public void init(Parameters params) {
+	public void init(com.simplicite.util.tools.Parameters params) {
 		super.init(params);
 
 		//addOperationDesc(null, OPERATION_PING, "This is the **ping** operation");
