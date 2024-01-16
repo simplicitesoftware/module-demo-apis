@@ -24,7 +24,7 @@ public class DemoAPI2 extends com.simplicite.webapp.services.RESTServiceExternal
 	private transient JSONObject config = null;
 
 	/**
-	 * Externa object initialization: load the JSON configuration stored in the dedicated system parameter
+	 * Load the JSON configuration stored in the dedicated system parameter
 	 */
 	@Override
 	public void init(Parameters params) {
