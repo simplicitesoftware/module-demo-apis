@@ -33,7 +33,7 @@ public class DemoAPI2 extends com.simplicite.webapp.services.RESTServiceExternal
 	public JSONArray searchObjectRecords(
 			@RESTServiceParam(name = "object", in = "path", desc = "Object name")
 			String object,
-			@RESTServiceParam(name = "filters", in = "body", type="object", desc = "Search filters")
+			@RESTServiceParam(name = "filters", in = "body", type = "object", desc = "Search filters")
 			JSONObject filters
 		) throws SearchException {
 		ObjectDB obj = null;
