@@ -32,10 +32,8 @@ To import this module:
 ```json
 {
 	"type": "git",
-	"origin": {
-		"uri": "https://github.com/simplicitesoftware/module-demo-apis.git",
-		"branch": "v6"
-	}
+	"branch": "v6",
+	"origin": { "uri": "https://github.com/simplicitesoftware/module-demo-apis.git" }
 }
 ```
 
