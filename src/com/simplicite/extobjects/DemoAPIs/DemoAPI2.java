@@ -21,6 +21,11 @@ import com.simplicite.util.tools.JSONTool;
 public class DemoAPI2 extends com.simplicite.webapp.services.RESTServiceExternalObject {
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Search object records operation method
+	 * @param object Object name
+	 * @return JSON array of found records
+ 	 */
 	@RESTServiceOperation(method = "get", path = "/{object}", desc = "Search for specified object")
 	public JSONArray searchObjectRecords(
 			@RESTServiceParam(name = "object", in = "path", desc = "Object name")
@@ -29,6 +34,12 @@ public class DemoAPI2 extends com.simplicite.webapp.services.RESTServiceExternal
 		return searchObjectRecords(object, null);
 	}
 
+	/**
+	 * Search object records operation with filters method
+	 * @param object Object name
+	 * @param filters JSON object of filters
+	 * @return JSON array of found records
+ 	 */
 	@RESTServiceOperation(method = "post", path = "/{object}", desc = "Search for specified object with filters")
 	public JSONArray searchObjectRecords(
 			@RESTServiceParam(name = "object", in = "path", desc = "Object name")
@@ -52,7 +63,13 @@ public class DemoAPI2 extends com.simplicite.webapp.services.RESTServiceExternal
 			returnAPIObject(obj); // Return the API object intance to the pool
 		}
 	}
-	
+
+	/**
+	 * Get object record operation method
+	 * @param object Object name
+	 * @param value ID field value
+	 * @return JSON object of record for specified ID
+ 	 */
 	@RESTServiceOperation(method = "get", path = "/{object}/{value}", desc = "Get for specified object")
 	public JSONObject getObjectRecord(
 			@RESTServiceParam(name = "object", in = "path", desc = "Object name")
