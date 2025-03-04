@@ -25,7 +25,7 @@ public class DemoAPI2 extends com.simplicite.webapp.services.RESTServiceExternal
 	 * Search object records operation method
 	 * @param object Object name
 	 * @return JSON array of found records
-	 * @thows SearchException if search fails
+	 * @throws SearchException if search fails
  	 */
 	@RESTServiceOperation(method = "get", path = "/{object}", desc = "Search for specified object")
 	public JSONArray searchObjectRecords(
@@ -40,7 +40,7 @@ public class DemoAPI2 extends com.simplicite.webapp.services.RESTServiceExternal
 	 * @param object Object name
 	 * @param filters JSON object of filters
 	 * @return JSON array of found records
-	 * @thows SearchException if search fails
+	 * @throws SearchException if search fails
  	 */
 	@RESTServiceOperation(method = "post", path = "/{object}", desc = "Search for specified object with filters")
 	public JSONArray searchObjectRecords(
@@ -71,7 +71,7 @@ public class DemoAPI2 extends com.simplicite.webapp.services.RESTServiceExternal
 	 * @param object Object name
 	 * @param value ID field value
 	 * @return JSON object of record for specified ID
-	 * @thows SearchException if get fails
+	 * @throws SearchException if get fails
  	 */
 	@RESTServiceOperation(method = "get", path = "/{object}/{value}", desc = "Get for specified object")
 	public JSONObject getObjectRecord(
