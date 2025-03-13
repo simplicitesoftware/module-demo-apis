@@ -15,7 +15,9 @@ public class DemoAPI1 extends com.simplicite.webapp.services.RESTMappedObjectsEx
 	private static final String SUPPLIERS = "suppliers";
 	private static final String PRODUCTS = "products";
 	private static final String ORDERS = "orders";
-	private static final String STATS = "stats";
+
+	private static final String STATS1 = "stats1";
+	private static final String STATS2 = "stats2";
 
 	@Override
 	public void init(Parameters params) {
@@ -47,22 +49,34 @@ public class DemoAPI1 extends com.simplicite.webapp.services.RESTMappedObjectsEx
 		//addOperationDesc(PRODUCTS, OPERATION_UPDATE, "This is the **update** operation for the _product_ business object");
 		//addOperationDesc(PRODUCTS, OPERATION_DELETE, "This is the **delete** operation for the _product_ business object");
 
-		addObject(ORDERS, "DemoOrder", "Order");
-		// or to force pagination (10 by 10): addObject(ORDERS, "DemoOrder", "Order", true, 10);
-		addRefField(ORDERS, PRODUCTS, "productId", "demoOrdPrdId", "productOrders", EMBED_LINKS, "Reference to product's row ID");
-		addField(ORDERS, "number", "demoOrdNumber");
-		addField(ORDERS, "date", "demoOrdDate");
-		addField(ORDERS, "status", "demoOrdStatus");
-		addField(ORDERS, "productReference", "demoOrdPrdId.demoPrdReference");
-		addField(ORDERS, "productName", "demoOrdPrdId.demoPrdName");
-		addField(ORDERS, "productType", "demoOrdPrdId.demoPrdType");
-		addField(ORDERS, "productSupplierCode", "demoOrdPrdId.demoPrdSupId.demoSupCode");
-		addField(ORDERS, "productSupplierName", "demoOrdPrdId.demoPrdSupId.demoSupName");
+		if (getGrant().accessObject("DemoOrder")) {
+			addObject(ORDERS, "DemoOrder", "Order");
+			// or to force pagination (10 by 10): addObject(ORDERS, "DemoOrder", "Order", true, 10);
+			addRefField(ORDERS, PRODUCTS, "productId", "demoOrdPrdId", "productOrders", EMBED_LINKS, "Reference to product's row ID");
+			addField(ORDERS, "number", "demoOrdNumber");
+			addField(ORDERS, "date", "demoOrdDate");
+			addField(ORDERS, "status", "demoOrdStatus");
+			addField(ORDERS, "productReference", "demoOrdPrdId.demoPrdReference");
+			addField(ORDERS, "productName", "demoOrdPrdId.demoPrdName");
+			addField(ORDERS, "productType", "demoOrdPrdId.demoPrdType");
+			addField(ORDERS, "productSupplierCode", "demoOrdPrdId.demoPrdSupId.demoSupCode");
+			addField(ORDERS, "productSupplierName", "demoOrdPrdId.demoPrdSupId.demoSupName");
+		}
 
-		addObject(STATS, "DemoStats", DESC_HIDDEN_FROM_SCHEMA);
-		addField(STATS, "status", "demoOrdStatus");
-		addField(STATS, "count", "demoStsCount");
-		addField(STATS, "quantity", "demoStsQuantity");
-		addField(STATS, "total", "demoStsTotal");
+		if (getGrant().accessObject("DemoStats1")) {
+			addObject(STATS1, "DemoStats1", DESC_HIDDEN_FROM_SCHEMA);
+			addField(STATS1, "status", "demoOrdStatus");
+			addField(STATS1, "count", "demoStsCount");
+			addField(STATS1, "quantities", "demoStsQuantities");
+			addField(STATS1, "totals", "demoStsTotals");
+		}
+
+		if (getGrant().accessObject("DemoStats2")) {
+			addObject(STATS2, "DemoStats2", DESC_HIDDEN_FROM_SCHEMA);
+			addField(STATS2, "product", "demoStsRowId.demoPrdName");
+			addField(STATS2, "count", "demoStsCount");
+			addField(STATS2, "quantites", "demoStsQuantities");
+			addField(STATS2, "totals", "demoStsTotals");
+		}
 	}
 }
