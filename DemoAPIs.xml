@@ -133,6 +133,7 @@ curl -s -H "Authorization: Bearer $TOKEN" \
 		<obe_nature>com_simplicite_webapp_services_RESTMappedObjectsExternalObject</obe_nature>
 		<obe_url/>
 		<obe_settings><![CDATA[{
+  "ping": true,
   "objects": [
     {
       "name": "suppliers",
@@ -210,27 +211,27 @@ curl -s -H "Authorization: Bearer $TOKEN" \
           "name": "count"
         },
         {
-          "field": "demoStsQuantity",
-          "name": "quantity"
+          "field": "demoStsQuantities",
+          "name": "quantities"
         },
         {
-          "field": "demoStsTotal",
-          "name": "total"
+          "field": "demoStsTotals",
+          "name": "totals"
         }
       ],
-      "object": "DemoStats"
+      "object": "DemoStats1"
     }
   ],
   "name": "Custom mapped API",
   "embedLinks": true,
   "version": "v1",
   "spec": 3,
-  "desc": "This is a custom **mapped** API of the demo application for the following business objects:\n\n- Suppliers\n- Products\n- Orders"
+  "desc": "This is a custom **mapped** API of the demo application for the following business objects:\n\n- Suppliers\n- Products\n- Statistics"
 }]]></obe_settings>
 		<obe_comment><![CDATA[Custom **mapped** REST web services]]></obe_comment>
 		<obe_help/>
-		<obe_class/>
-		<obe_script_id>src/com/simplicite/extobjects/DemoAPIs/DemoAPI1.java</obe_script_id>
+		<obe_class>com.simplicite.webapp.services.RESTMappedObjectsExternalObject</obe_class>
+		<obe_script_id/>
 		<obe_icon/>
 		<obe_permalink/>
 		<obe_widget>0</obe_widget>
