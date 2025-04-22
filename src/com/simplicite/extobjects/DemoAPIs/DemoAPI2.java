@@ -62,7 +62,7 @@ public class DemoAPI2 extends com.simplicite.webapp.services.RESTServiceExternal
 
 			return list;
 		} finally {
-			returnAPIObject(obj); // Return the API object intance to the pool
+			returnAPIObject(obj); // Return the API object instance to the pool
 		}
 	}
 
@@ -97,7 +97,7 @@ public class DemoAPI2 extends com.simplicite.webapp.services.RESTServiceExternal
 
 			return item;
 		} finally {
-			returnAPIObject(obj); // Return the API object intance to the pool
+			returnAPIObject(obj); // Return the API object instance to the pool
 		}
 	}
 
