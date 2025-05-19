@@ -6,6 +6,7 @@
 components:
   schemas:
     Error404:
+      description: Not found
       type: object
       properties:
         error:
@@ -17,6 +18,7 @@ components:
           enum:
           - 404
     ActionResult:
+      description: Action result
       type: object
       properties:
         result:
@@ -29,6 +31,7 @@ components:
           description: Object item with lists of linked objects' items
           type: object
     PublicationResult:
+      description: Publication result
       type: object
       properties:
         mime:
@@ -38,6 +41,7 @@ components:
           description: Content (plain text or base64 encoded)
           type: string
     PlaceData:
+      description: Place data
       type: object
       properties:
         coord:
@@ -59,6 +63,7 @@ components:
           description: 'Label #3'
           type: string
     Error400:
+      description: Bad request
       type: object
       properties:
         error:
@@ -70,6 +75,7 @@ components:
           enum:
           - 400
     Error401:
+      description: Unauthorized
       type: object
       properties:
         error:
@@ -81,6 +87,7 @@ components:
           enum:
           - 401
     Error500:
+      description: Internal server error
       type: object
       properties:
         error:
@@ -92,6 +99,7 @@ components:
           enum:
           - 500
     PlaceMapData:
+      description: Places map data
       type: object
       properties:
         places:
@@ -103,6 +111,7 @@ components:
           description: Name
           type: string
     Error403:
+      description: Forbidden
       type: object
       properties:
         error:
