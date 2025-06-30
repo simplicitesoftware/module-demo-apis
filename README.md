@@ -119,3 +119,9 @@ Custom **mapped** REST web services
 Custom REST web services
 
 
+`DemoAPI3` external object definition
+-------------------------------------
+
+Custom generic **mapped** REST web services
+
+
