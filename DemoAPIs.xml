@@ -160,6 +160,7 @@ curl -s -H "Authorization: Bearer $TOKEN" \
         "depth": 10,
         "name": "supplierProducts",
         "refObjectName": "suppliers",
+        "embed": true,
         "desc": "Reference to supplier's row ID"
       }],
       "fields": [
