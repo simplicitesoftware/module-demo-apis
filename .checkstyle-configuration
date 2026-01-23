@@ -9,6 +9,8 @@
   <property name="charset" value="UTF-8"/>
   <module name="TreeWalker">
     <module name="UnusedImports"/>
+    <module name="RedundantImport"/>
+    <module name="UnusedLocalVariable"/>
     <module name="LeftCurly"/>
     <module name="RightCurly"/>
     <module name="AnnotationLocation"/>
@@ -27,5 +29,6 @@
     <module name="StaticVariableName"/>
     <module name="ParameterName"/>
     <module name="WhitespaceAround"/>
+    <module name="MissingOverride"/>
   </module>
 </module>

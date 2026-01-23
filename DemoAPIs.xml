@@ -10,7 +10,7 @@
 		<mdl_url><![CDATA[{
     "maven": {
         "checkstyle": true,
-        "repositoryUrl": "https://platform.simplicite.io/6.2/maven"
+        "repositoryUrl": "https://platform.simplicite.io/6.3/maven"
     },
     "origin": {"uri": "https://github.com/simplicitesoftware/module-demo-apis.git"},
     "type": "git",
