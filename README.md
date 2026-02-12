@@ -11,14 +11,16 @@
 `DemoAPIs` module definition
 ============================
 
-### Introduction
+Introduction
+------------
 
-This module contains the following custom APIs for the demo **order management** application.:
+This module contains the following custom APIs for the demo **order management** application:
 
 - A standard mapped API for various business object
 - A custom API for the product business object
 
-### Prerequisites
+Prerequisites
+-------------
 
 The `Demo` module **must** be installed and configured before importing this addon module.
 
@@ -40,7 +42,8 @@ To import this module:
 
 - Click on the _Import module_ button
 
-### Configure
+Configure
+---------
 
 Custom URIs can be configured in the `URI_MAPPINGS` system parameter:
 
