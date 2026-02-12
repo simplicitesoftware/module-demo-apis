@@ -1,18 +1,21 @@
 ![Logo](https://platform.simplicite.io/logos/standard/logo250.png)
 * * *
 
-### Introduction
+Introduction
+------------
 
 This module contains the following custom APIs for the demo **order management** application.:
 
 - A **mapped** API for various business object
 - A **custom** API for the product business object
 
-### Prerequisites
+Prerequisites
+-------------
 
 The `Demo` module **must** be installed and configured before importing this addon module.
 
-### Import
+Import
+------
 
 To import this module:
 
@@ -29,7 +32,8 @@ To import this module:
 
 - Click on the _Import module_ button
 
-### Configure
+Configure
+---------
 
 Custom URIs can be configured in the `URI_MAPPINGS` system parameter:
 
@@ -42,7 +46,8 @@ Custom URIs can be configured in the `URI_MAPPINGS` system parameter:
 ]
 ```
 
-### Usage
+Usage
+-----
 
 In both cases you need to obtain an authentication token:
 
@@ -50,7 +55,7 @@ In both cases you need to obtain an authentication token:
 TOKEN=$(curl -s -u <username>:<password> "<base URL>/api/login")
 ```
 
-#### Mapped API usage
+### Mapped API usage
 
 Get the OpenAPI schema:
 
@@ -64,7 +69,7 @@ Get a list of mapped object (e.g. `suppliers`)
 curl -s -H "Authorization: Bearer $TOKEN" "<base URL>/api/ext/DemoAPI1/suppliers"
 ```
 
-#### Custom API usage
+### Custom API usage
 
 Get the OpenAPI schema:
 
