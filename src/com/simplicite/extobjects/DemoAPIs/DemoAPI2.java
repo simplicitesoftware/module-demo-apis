@@ -53,7 +53,7 @@ public class DemoAPI2 extends com.simplicite.webapp.services.RESTServiceExternal
 		try {
 			obj = borrowAPIObject(object); // Borrow an API object instance from the pool (ZZZ must be returned, see below)
 
-			List<String[]> rows = obj.getTool().search(filters); // filtered search
+			List<String[]> rows = obj.getTool().search(filters == null ? new JSONObject() : filters); // filtered search
 
 			// Remove standard row IDs
 			JSONArray list = new JSONArray(obj.toJSON(rows, null, false, true, false));

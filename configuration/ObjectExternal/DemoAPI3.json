@@ -1,0 +1,15 @@
+{
+ "obe_name": "DemoAPI3",
+ "obe_type": "E",
+ "obe_nature": "com_simplicite_webapp_services_RESTMappedObjectsExternalObject",
+ "obe_url": null,
+ "obe_settings": "{\n  \"objectsCase\": \"camel\",\n  \"objects\": [\n    \"DemoSupplier\",\n    \"DemoProduct\"\n  ],\n  \"name\": \"Demo 3\",\n  \"fieldsCase\": \"snake\",\n  \"pathsCase\": \"kebab\"\n}",
+ "obe_comment": "Custom generic **mapped** REST web services",
+ "obe_help": null,
+ "obe_class": "com.simplicite.webapp.services.RESTMappedObjectsExternalObject",
+ "obe_script_id": null,
+ "obe_icon": null,
+ "obe_permalink": null,
+ "obe_widget": null,
+ "row_module_id__mdl_name": "DemoAPIs"
+}
