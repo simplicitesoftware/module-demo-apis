@@ -30,53 +30,59 @@ public class DemoAPI2 extends com.simplicite.webapp.services.RESTServiceExternal
 	public void init(Parameters params) {
 		config = getGrant().getJSONObjectParameter("DEMO_API2_CONFIG");
 	}
-
+	
 	/**
 	 * Search/select using URI <code>/api/ext/DemoAPI2/&lt;object name&gt;[?&lt;field name 1&bt;=&lt;filter 1&bt;&amp;&lt;field name 2&gt;=&lt;filter 2&gt;&amp;...|/&lt;unique ID field name&gt;]</code>
 	 */
 	@Override
 	public Object get(Parameters params) throws HTTPException {
+		List<String> parts = params.getURIParts(getName());
+
+		if (parts.isEmpty())
+			return notFound("No object");
+
+		if ("openapi.yml".equals(parts.get(0))) {
+			setYAMLMIMEType();
+			return JSONTool.getYAMLASCIILogo(null) + JSONTool.toYAML(openapi());
+		}
+
+		String objName = parts.get(0);
+		if (!config.has(objName))
+			return notFound("Unknown object: " + objName);
+
 		ObjectDB obj = null;
 		try {
-			List<String> parts = params.getURIParts(getName());
-
-			if (parts.isEmpty())
-				return notFound("No object");
-
-			if ("openapi.yml".equals(parts.get(0))) {
-				setYAMLMIMEType();
-				return JSONTool.getYAMLASCIILogo(null) + JSONTool.toYAML(openapi());
-			}
-
-			String objName = parts.get(0);
-			if (!config.has(objName))
-				return notFound("Unknown object: " + objName);
-
 			obj = borrowAPIObject(objName); // Borrow an API object instance from the pool (ZZZ must be returned, see below)
 
 			if (parts.size() == 1) { // Search
-				List<String[]> rows = obj.getTool().search(params.getParameters()); // filtered search
 
+				List<String[]> rows = null;
+				JSONObject filters = params.getJSONObject();
+				if (filters != null)
+					rows = obj.getTool().search(filters); // filtered search using JSON body (POST)
+				else
+					rows = obj.getTool().search(params.getParameters()); // filtered search using request parameters (GET)
+	
 				// Remove standard row IDs
 				JSONArray list = new JSONArray(obj.toJSON(rows, null, false, true, false));
 				for (int i = 0; i < list.length(); i++)
 					list.getJSONObject(i).remove("row_id");
-
-				return list;
+	
+				return success(new JSONObject().put("payload", list));
 			} else { // Select from the custom ID field
 				String value = parts.get(1);
 				String field = config.getString(objName);
 				List<String[]> rows = obj.getTool().search(new JSONObject().put(field, value)); // filtered search using reference only
-
+	
 				// No unique record matching the custom ID field's value => not found
 				if (rows.size() != 1)
 					return notFound("No " + objName + " for " + field + " = " + value);
-
+	
 				// Remove standard row ID
 				JSONObject item = new JSONObject(obj.toJSON(rows.get(0), null, false, true));
 				item.remove("row_id");
-
-				return item;
+	
+				return success(new JSONObject().put("payload", item));
 			}
 		} catch (SearchException e) {
 			return error(e);
@@ -84,6 +90,11 @@ public class DemoAPI2 extends com.simplicite.webapp.services.RESTServiceExternal
 			if (obj != null)
 				returnAPIObject(obj); // Return the API object intance to the pool
 		}
+	}
+
+	@Override
+	public Object post(Parameters params) throws HTTPException {
+		return get(params);
 	}
 
 	@Override
