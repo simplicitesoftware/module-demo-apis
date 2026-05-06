@@ -68,7 +68,7 @@ public class DemoAPI2 extends com.simplicite.webapp.services.RESTServiceExternal
 				for (int i = 0; i < list.length(); i++)
 					list.getJSONObject(i).remove("row_id");
 	
-				return success(new JSONObject().put("payload", list));
+				return success(list);
 			} else { // Select from the custom ID field
 				String value = parts.get(1);
 				String field = config.getString(objName);
@@ -82,7 +82,7 @@ public class DemoAPI2 extends com.simplicite.webapp.services.RESTServiceExternal
 				JSONObject item = new JSONObject(obj.toJSON(rows.get(0), null, false, true));
 				item.remove("row_id");
 	
-				return success(new JSONObject().put("payload", item));
+				return success(item);
 			}
 		} catch (SearchException e) {
 			return error(e);
