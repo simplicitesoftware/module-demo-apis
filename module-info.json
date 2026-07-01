@@ -1,9 +1,9 @@
 {
-    "date": "2026-04-21 14:04:20",
+    "date": "2026-07-01 15:21:50",
     "name": "DemoAPIs",
-    "format": "json",
-    "files": ["configuration/**.json"],
+    "format": "xml",
+    "files": ["DemoAPIs.xml"],
     "repository": {"origin": {"uri": "https://github.com/simplicitesoftware/module-demo-apis.git"}},
-    "version": "6",
-    "platform": "6.3.8-preview"
+    "version": "7",
+    "platform": "7.0.0-alpha"
 }

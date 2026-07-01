@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simplicite elements="17" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.simplicite.fr/base" xsi:schemaLocation="http://www.simplicite.fr/base https://www.simplicite.io/resources/schemas/base.xsd">
+<object>
+	<name>Module</name>
+	<action>upsert</action>
+	<data>
+		<mdl_name>DemoAPIs</mdl_name>
+		<mdl_version>7</mdl_version>
+		<mdl_prefix>demo</mdl_prefix>
+		<mdl_url><![CDATA[{
+    "maven": {
+        "checkstyle": true,
+        "repositoryUrl": "https://platform.simplicite.io/7.0/maven"
+    },
+    "origin": {"uri": "https://github.com/simplicitesoftware/module-demo-apis.git"},
+    "type": "git",
+    "branch": "v7",
+    "export": {
+        "format": "xml",
+        "exploded": false
+    }
+}]]></mdl_url>
+		<mdl_type>C</mdl_type>
+		<mdl_comment><![CDATA[Introduction
+------------
+
+This module contains the following custom APIs for the demo **order management** application.:
+
+- A **mapped** API for various business object
+- A **custom** API for the product business object
+
+Prerequisites
+-------------
+
+The `Demo` module **must** be installed and configured before importing this addon module.
+
+Import
+------
+
+To import this module:
+
+- Create a module named `DemoAddons`
+- Set the settings as:
+
+```json
+{
+	"type": "git",
+	"branch": "v6",
+	"origin": { "uri": "https://github.com/simplicitesoftware/module-demo-apis.git" }
+}
+```
+
+- Click on the _Import module_ button
+
+Configure
+---------
+
+Custom URIs can be configured in the `URI_MAPPINGS` system parameter:
+
+```json
+[
+	(...)
+	{ "source": "^/demo/api/v1(.+)$", "destination": "/api/ext/DemoAPI1$1" },
+	{ "source": "^/demo/api/v2(.+)$", "destination": "/api/ext/DemoAPI2$1" },
+	(...)
+]
+```
+
+Usage
+-----
+
+In both cases you need to obtain an authentication token:
+
+```text
+TOKEN=$(curl -s -u <username>:<password> "<base URL>/api/login")
+```
+
+### Mapped API usage
+
+Get the OpenAPI schema:
+
+```text
+curl -s -H "Authorization: Bearer $TOKEN" "<base URL>/api/ext/DemoAPI1/openapi.<json|yaml>"
+```
+
+Get a list of mapped object (e.g. `suppliers`)
+
+```text
+curl -s -H "Authorization: Bearer $TOKEN" "<base URL>/api/ext/DemoAPI1/suppliers"
+```
+
+### Custom API usage
+
+Get the OpenAPI schema:
+
+```text
+curl -s -H "Authorization: Bearer $TOKEN" "<base URL>/api/ext/DemoAPI2/openapi.<json|yaml>"
+```
+
+Get a list of all products:
+
+```text
+curl -s -H "Authorization: Bearer $TOKEN" "<base URL>/api/ext/DemoAPI2/DemoProduct"
+```
+
+Get a single product with its reference (e.g. `REF002`):
+
+```text
+curl -s -H "Authorization: Bearer $TOKEN" "<base URL>/api/ext/DemoAPI2/DemoProduct/REF002"
+```
+
+Search for products passing filters as JSON body
+(e.g. search for the available products supplied by the `BIM` supplier):
+
+```text
+curl -s -H "Authorization: Bearer $TOKEN" \
+    -H 'Content-Type: application/json' \
+    -d '{ "demoPrdSupId__demoSupCode": "BIM", "demoPrdAvailable": true }' \
+    "<base URL>/api/ext/DemoAPI2/DemoProduct"
+```
+
+> **Note** the `Content-Type: application/json` header is **mandatory** for the 
+> body to be parsed as JSON.]]></mdl_comment>
+	</data>
+</object>
+<object>
+	<name>ModuleLink</name>
+	<action>upsert</action>
+	<data>
+		<mdk_parent_id.mdl_name>Demo</mdk_parent_id.mdl_name>
+		<row_module_id.mdl_name>DemoAPIs</row_module_id.mdl_name>
+		<mdk_cascad>C</mdk_cascad>
+		<mdk_order/>
+	</data>
+</object>
+<object>
+	<name>ObjectExternal</name>
+	<action>upsert</action>
+	<data>
+		<obe_name>DemoAPI1</obe_name>
+		<obe_type>E</obe_type>
+		<obe_nature>com_simplicite_webapp_services_RESTMappedObjectsExternalObject</obe_nature>
+		<obe_url/>
+		<obe_settings><![CDATA[{
+  "ping": true,
+  "objects": [
+    {
+      "name": "suppliers",
+      "fields": [
+        {
+          "field": "demoSupCode",
+          "name": "code",
+          "desc": "Supplier code"
+        },
+        {
+          "field": "demoSupName",
+          "name": "name",
+          "desc": "Supplier name"
+        }
+      ],
+      "object": "DemoSupplier",
+      "desc": "Suppliers"
+    },
+    {
+      "name": "products",
+      "refFields": [{
+        "refField": "demoPrdSupId",
+        "refFieldName": "supplierId",
+        "depth": 10,
+        "name": "supplierProducts",
+        "refObjectName": "suppliers",
+        "embed": true,
+        "desc": "Reference to supplier's row ID"
+      }],
+      "fields": [
+        {
+          "field": "demoPrdSupId.demoSupCode",
+          "name": "supplierCode",
+          "desc": "Supplier code"
+        },
+        {
+          "field": "demoPrdSupId.demoSupName",
+          "name": "supplierName",
+          "desc": "Supplier name"
+        },
+        {
+          "field": "demoPrdReference",
+          "name": "reference",
+          "desc": "Product reference",
+          "example": "REF001"
+        },
+        {
+          "field": "demoPrdName",
+          "name": "name",
+          "desc": "Product name"
+        },
+        {
+          "field": "demoPrdType",
+          "name": "type",
+          "desc": "Product type"
+        },
+        {
+          "field": "demoPrdAvailable",
+          "name": "available",
+          "desc": "Product available?"
+        }
+      ],
+      "object": "DemoProduct",
+      "desc": "Products"
+    },
+    {
+      "hidden": true,
+      "name": "stats",
+      "fields": [
+        {
+          "field": "demoOrdStatus",
+          "name": "status"
+        },
+        {
+          "field": "demoStsCount",
+          "name": "count"
+        },
+        {
+          "field": "demoStsQuantities",
+          "name": "quantities"
+        },
+        {
+          "field": "demoStsTotals",
+          "name": "totals"
+        }
+      ],
+      "object": "DemoStats1"
+    }
+  ],
+  "name": "Custom mapped API",
+  "embedLinks": true,
+  "version": "v1",
+  "spec": 3,
+  "desc": "This is a custom **mapped** API of the demo application for the following business objects:\n\n- Suppliers\n- Products\n- Statistics"
+}]]></obe_settings>
+		<obe_comment><![CDATA[Custom **mapped** REST web services]]></obe_comment>
+		<obe_help/>
+		<obe_class>com.simplicite.webapp.services.RESTMappedObjectsExternalObject</obe_class>
+		<obe_script_id/>
+		<obe_icon/>
+		<obe_permalink/>
+		<obe_widget>0</obe_widget>
+		<row_module_id.mdl_name>DemoAPIs</row_module_id.mdl_name>
+		<obe_width/>
+		<obe_height/>
+	</data>
+	<data>
+		<obe_name>DemoAPI2</obe_name>
+		<obe_type>E</obe_type>
+		<obe_nature>com_simplicite_webapp_services_RESTServiceExternalObject</obe_nature>
+		<obe_url/>
+		<obe_settings><![CDATA[{
+  "DemoProduct": "demoPrdReference",
+  "DemoSupplier": "demoSupCode"
+}]]></obe_settings>
+		<obe_comment><![CDATA[Custom REST web services]]></obe_comment>
+		<obe_help/>
+		<obe_class/>
+		<obe_script_id>src/com/simplicite/extobjects/DemoAPIs/DemoAPI2.java</obe_script_id>
+		<obe_icon/>
+		<obe_permalink/>
+		<obe_widget>0</obe_widget>
+		<row_module_id.mdl_name>DemoAPIs</row_module_id.mdl_name>
+		<obe_width/>
+		<obe_height/>
+	</data>
+	<data>
+		<obe_name>DemoAPI3</obe_name>
+		<obe_type>E</obe_type>
+		<obe_nature>com_simplicite_webapp_services_RESTMappedObjectsExternalObject</obe_nature>
+		<obe_url/>
+		<obe_settings><![CDATA[{
+  "objectsCase": "camel",
+  "objects": [
+    "DemoSupplier",
+    "DemoProduct"
+  ],
+  "name": "Demo 3",
+  "fieldsCase": "snake",
+  "pathsCase": "kebab"
+}]]></obe_settings>
+		<obe_comment><![CDATA[Custom generic **mapped** REST web services]]></obe_comment>
+		<obe_help/>
+		<obe_class>com.simplicite.webapp.services.RESTMappedObjectsExternalObject</obe_class>
+		<obe_script_id/>
+		<obe_icon/>
+		<obe_permalink/>
+		<obe_widget/>
+		<row_module_id.mdl_name>DemoAPIs</row_module_id.mdl_name>
+		<obe_width/>
+		<obe_height/>
+	</data>
+</object>
+<object>
+	<name>Resource</name>
+	<action>upsert</action>
+	<data>
+		<res_object>
+			<object>
+				<name>Disposition</name>
+				<data>
+					<dis_code>default</dis_code>
+				</data>
+			</object>
+		</res_object>
+		<res_type>IMG</res_type>
+		<res_lang>ANY</res_lang>
+		<res_code>demoapis-module</res_code>
+		<res_cached>0</res_cached>
+		<res_file/>
+		<res_image>resources/Disposition/default/demoapis-module.svg</res_image>
+		<row_module_id.mdl_name>DemoAPIs</row_module_id.mdl_name>
+	</data>
+</object>
+<object>
+	<name>TranslateExternal</name>
+	<action>upsert</action>
+	<data>
+		<tsl_object>
+			<object>
+				<name>ObjectExternal</name>
+				<data>
+					<obe_name>DemoAPI2</obe_name>
+				</data>
+			</object>
+		</tsl_object>
+		<tsl_lang>ANY</tsl_lang>
+		<tsl_value>Custom API example 2</tsl_value>
+		<tsl_plural_value/>
+		<tsl_help/>
+		<row_module_id.mdl_name>DemoAPIs</row_module_id.mdl_name>
+	</data>
+	<data>
+		<tsl_object>
+			<object>
+				<name>ObjectExternal</name>
+				<data>
+					<obe_name>DemoAPI1</obe_name>
+				</data>
+			</object>
+		</tsl_object>
+		<tsl_lang>ANY</tsl_lang>
+		<tsl_value>Custom API example 1</tsl_value>
+		<tsl_plural_value/>
+		<tsl_help/>
+		<row_module_id.mdl_name>DemoAPIs</row_module_id.mdl_name>
+	</data>
+	<data>
+		<tsl_object>
+			<object>
+				<name>ObjectExternal</name>
+				<data>
+					<obe_name>DemoAPI3</obe_name>
+				</data>
+			</object>
+		</tsl_object>
+		<tsl_lang>ENU</tsl_lang>
+		<tsl_value>API3</tsl_value>
+		<tsl_plural_value/>
+		<tsl_help/>
+		<row_module_id.mdl_name>DemoAPIs</row_module_id.mdl_name>
+	</data>
+	<data>
+		<tsl_object>
+			<object>
+				<name>ObjectExternal</name>
+				<data>
+					<obe_name>DemoAPI3</obe_name>
+				</data>
+			</object>
+		</tsl_object>
+		<tsl_lang>FRA</tsl_lang>
+		<tsl_value>API3</tsl_value>
+		<tsl_plural_value/>
+		<tsl_help/>
+		<row_module_id.mdl_name>DemoAPIs</row_module_id.mdl_name>
+	</data>
+</object>
+<object>
+	<name>Permission</name>
+	<action>upsert</action>
+	<data>
+		<prm_group_id.grp_name>DEMO_ADMIN</prm_group_id.grp_name>
+		<prm_object>
+			<object>
+				<name>ObjectExternal</name>
+				<data>
+					<obe_name>DemoAPI2</obe_name>
+				</data>
+			</object>
+		</prm_object>
+		<prm_perm>1</prm_perm>
+		<prm_upd/>
+		<prm_req/>
+		<prm_prop/>
+		<prm_value/>
+		<row_module_id.mdl_name>DemoAPIs</row_module_id.mdl_name>
+	</data>
+	<data>
+		<prm_group_id.grp_name>DEMO_ADMIN</prm_group_id.grp_name>
+		<prm_object>
+			<object>
+				<name>ObjectExternal</name>
+				<data>
+					<obe_name>DemoAPI1</obe_name>
+				</data>
+			</object>
+		</prm_object>
+		<prm_perm>1</prm_perm>
+		<prm_upd/>
+		<prm_req/>
+		<prm_prop/>
+		<prm_value/>
+		<row_module_id.mdl_name>DemoAPIs</row_module_id.mdl_name>
+	</data>
+	<data>
+		<prm_group_id.grp_name>DEMO_ADMIN</prm_group_id.grp_name>
+		<prm_object>
+			<object>
+				<name>ObjectExternal</name>
+				<data>
+					<obe_name>DemoAPI3</obe_name>
+				</data>
+			</object>
+		</prm_object>
+		<prm_perm>1</prm_perm>
+		<prm_upd>0</prm_upd>
+		<prm_req>0</prm_req>
+		<prm_prop/>
+		<prm_value/>
+		<row_module_id.mdl_name>DemoAPIs</row_module_id.mdl_name>
+	</data>
+	<data>
+		<prm_group_id.grp_name>DEMO_PUBLIC</prm_group_id.grp_name>
+		<prm_object>
+			<object>
+				<name>ObjectExternal</name>
+				<data>
+					<obe_name>DemoAPI1</obe_name>
+				</data>
+			</object>
+		</prm_object>
+		<prm_perm>1</prm_perm>
+		<prm_upd>0</prm_upd>
+		<prm_req>0</prm_req>
+		<prm_prop/>
+		<prm_value/>
+		<row_module_id.mdl_name>DemoAPIs</row_module_id.mdl_name>
+	</data>
+	<data>
+		<prm_group_id.grp_name>DEMO_WEBSITE</prm_group_id.grp_name>
+		<prm_object>
+			<object>
+				<name>ObjectExternal</name>
+				<data>
+					<obe_name>DemoAPI2</obe_name>
+				</data>
+			</object>
+		</prm_object>
+		<prm_perm>1</prm_perm>
+		<prm_upd/>
+		<prm_req/>
+		<prm_prop/>
+		<prm_value/>
+		<row_module_id.mdl_name>DemoAPIs</row_module_id.mdl_name>
+	</data>
+	<data>
+		<prm_group_id.grp_name>DEMO_WEBSITE</prm_group_id.grp_name>
+		<prm_object>
+			<object>
+				<name>ObjectExternal</name>
+				<data>
+					<obe_name>DemoAPI1</obe_name>
+				</data>
+			</object>
+		</prm_object>
+		<prm_perm>1</prm_perm>
+		<prm_upd/>
+		<prm_req/>
+		<prm_prop/>
+		<prm_value/>
+		<row_module_id.mdl_name>DemoAPIs</row_module_id.mdl_name>
+	</data>
+	<data>
+		<prm_group_id.grp_name>DEMO_WEBSITE</prm_group_id.grp_name>
+		<prm_object>
+			<object>
+				<name>ObjectExternal</name>
+				<data>
+					<obe_name>DemoAPI3</obe_name>
+				</data>
+			</object>
+		</prm_object>
+		<prm_perm>1</prm_perm>
+		<prm_upd>0</prm_upd>
+		<prm_req>0</prm_req>
+		<prm_prop/>
+		<prm_value/>
+		<row_module_id.mdl_name>DemoAPIs</row_module_id.mdl_name>
+	</data>
+</object>
+</simplicite>

@@ -8,24 +8,4 @@
 ![Logo](https://platform.simplicite.io/logos/standard/logo250.png)
 * * *
 
-`DemoAPIs` module definition
-============================
-
-`DemoAPI1` external object definition
--------------------------------------
-
-Custom **mapped** REST web services
-
-
-`DemoAPI2` external object definition
--------------------------------------
-
-Custom REST web services
-
-
-`DemoAPI3` external object definition
--------------------------------------
-
-Custom generic **mapped** REST web services
-
-
+MODULE IS EMPTY
