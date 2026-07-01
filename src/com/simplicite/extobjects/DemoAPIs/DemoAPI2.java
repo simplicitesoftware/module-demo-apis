@@ -30,8 +30,7 @@ public class DemoAPI2 extends com.simplicite.webapp.services.RESTServiceExternal
     @RESTServiceOperation(method = "get", path = "/{object}", desc = "Search for specified object")
     public JSONArray searchObjectRecords(
             @RESTServiceParam(name = "object", in = "path", desc = "Object name")
-            String object
-        ) throws SearchException {
+            String object) throws SearchException {
         return searchObjectRecords(object, null);
     }
 
@@ -47,8 +46,7 @@ public class DemoAPI2 extends com.simplicite.webapp.services.RESTServiceExternal
             @RESTServiceParam(name = "object", in = "path", desc = "Object name")
             String object,
             @RESTServiceParam(name = "filters", in = "body", type = "object", desc = "Search filters")
-            JSONObject filters
-        ) throws SearchException {
+            JSONObject filters) throws SearchException {
         ObjectDB obj = null;
         try {
             obj = borrowAPIObject(object); // Borrow an API object instance from the pool (ZZZ must be returned, see below)
@@ -78,8 +76,7 @@ public class DemoAPI2 extends com.simplicite.webapp.services.RESTServiceExternal
             @RESTServiceParam(name = "object", in = "path", desc = "Object name")
             String object,
             @RESTServiceParam(name = "value", in = "path", desc = "ID field value, must denote a unique record")
-            String value
-        ) throws SearchException {
+            String value) throws SearchException {
         ObjectDB obj = null;
         try {
             obj = borrowAPIObject(object); // Borrow an API object instance from the pool (ZZZ must be returned, see below)
