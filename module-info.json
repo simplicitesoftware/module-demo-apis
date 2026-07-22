@@ -1,9 +1,11 @@
 {
-    "date": "2026-05-06 16:14:33",
+    "date": "2026-07-22 17:29:26",
     "name": "DemoAPIs",
+    "platform_revision": "5.3.92-preview",
     "format": "xml",
     "files": ["DemoAPIs.xml"],
     "repository": {"origin": {"uri": "https://github.com/simplicitesoftware/module-demo-apis.git"}},
     "version": "5",
-    "platform": "5.3.88-preview"
+    "branch": "master",
+    "platform": "5.3"
 }
