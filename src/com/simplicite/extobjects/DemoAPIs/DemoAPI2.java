@@ -30,7 +30,7 @@ public class DemoAPI2 extends com.simplicite.webapp.services.RESTServiceExternal
     @RESTServiceOperation(method = "get", path = "/{object}", desc = "Search for specified object")
     public JSONArray searchObjectRecords(
             @RESTServiceParam(name = "object", in = "path", desc = "Object name")
-            String object) throws SearchException {
+            String object) {
         return searchObjectRecords(object, null);
     }
 
@@ -46,7 +46,7 @@ public class DemoAPI2 extends com.simplicite.webapp.services.RESTServiceExternal
             @RESTServiceParam(name = "object", in = "path", desc = "Object name")
             String object,
             @RESTServiceParam(name = "filters", in = "body", type = "object", desc = "Search filters")
-            JSONObject filters) throws SearchException {
+            JSONObject filters) {
         ObjectDB obj = null;
         try {
             obj = borrowAPIObject(object); // Borrow an API object instance from the pool (ZZZ must be returned, see below)
@@ -76,7 +76,7 @@ public class DemoAPI2 extends com.simplicite.webapp.services.RESTServiceExternal
             @RESTServiceParam(name = "object", in = "path", desc = "Object name")
             String object,
             @RESTServiceParam(name = "value", in = "path", desc = "ID field value, must denote a unique record")
-            String value) throws SearchException {
+            String value) {
         ObjectDB obj = null;
         try {
             obj = borrowAPIObject(object); // Borrow an API object instance from the pool (ZZZ must be returned, see below)
@@ -125,7 +125,7 @@ public class DemoAPI2 extends com.simplicite.webapp.services.RESTServiceExternal
                 return success(searchObjectRecords(object));
             else
                 return success(getObjectRecord(object, parts.get(1)));
-        } catch (SearchException e) {
+        } catch (Exception e) {
             return error(e);
         }
     }
@@ -143,7 +143,7 @@ public class DemoAPI2 extends com.simplicite.webapp.services.RESTServiceExternal
 
         try {
             return success(searchObjectRecords(object, params.getJSONObject()));
-        } catch (SearchException e) {
+        } catch (Exception e) {
             return error(e);
         }
     }

@@ -313,6 +313,7 @@ curl -s -H "Authorization: Bearer $TOKEN" \
 		<res_code>demoapis-module</res_code>
 		<res_cached>0</res_cached>
 		<res_file/>
+		<res_file_compiled/>
 		<res_image>resources/Disposition/default/demoapis-module.svg</res_image>
 		<row_module_id.mdl_name>DemoAPIs</row_module_id.mdl_name>
 	</data>
