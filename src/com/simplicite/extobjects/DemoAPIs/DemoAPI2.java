@@ -125,7 +125,7 @@ public class DemoAPI2 extends com.simplicite.webapp.services.RESTServiceExternal
                 return success(searchObjectRecords(object));
             else
                 return success(getObjectRecord(object, parts.get(1)));
-        } catch (Exception e) {
+        } catch (Exception e) { // Unexpected error
             return error(e);
         }
     }
@@ -143,7 +143,7 @@ public class DemoAPI2 extends com.simplicite.webapp.services.RESTServiceExternal
 
         try {
             return success(searchObjectRecords(object, params.getJSONObject()));
-        } catch (Exception e) {
+        } catch (Exception e) { // Unexpected error
             return error(e);
         }
     }
