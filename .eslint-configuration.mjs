@@ -8,6 +8,8 @@ export default [
   },
   {
     languageOptions: {
+      ecmaVersion: 2026,
+      sourceType: 'script',
       globals: {
         ...globals.browser,
         '$': true,
@@ -24,6 +26,7 @@ export default [
         '$tools': true,
         '$console': true,
         '$view': true,
+        '$factory': true,
       }
     },
     rules: {

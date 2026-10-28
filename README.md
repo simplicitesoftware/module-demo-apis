@@ -1,39 +1,16 @@
 ![Logo](https://platform.simplicite.io/logos/standard/logo250.png)
 * * *
 
-Introduction
-------------
-
-This module contains the following custom APIs for the demo **order management** application.:
+This module contains examples of **custom APIs**
+for the demo **order management** application.:
 
 - A **mapped** API for various business object
 - A **custom** API for the product business object
 
-Prerequisites
--------------
+**Note**: The `Demo` module **must** be installed and configured
+before importing this additional module.
 
-The `Demo` module **must** be installed and configured before importing this addon module.
-
-Import
-------
-
-To import this module:
-
-- Create a module named `DemoAddons`
-- Set the settings as:
-
-```json
-{
-	"type": "git",
-	"branch": "v6",
-	"origin": { "uri": "https://github.com/simplicitesoftware/module-demo-apis.git" }
-}
-```
-
-- Click on the _Import module_ button
-
-Configure
----------
+## Configuration
 
 Custom URIs can be configured in the `URI_MAPPINGS` system parameter:
 
@@ -46,8 +23,7 @@ Custom URIs can be configured in the `URI_MAPPINGS` system parameter:
 ]
 ```
 
-Usage
------
+## Usage
 
 In both cases you need to obtain an authentication token:
 
